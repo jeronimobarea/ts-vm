@@ -1,5 +1,5 @@
-import { InvalidStackValue, StackOverflow, StackUnderflow } from "./errors";
 import { MAX_UINT256 } from "../../constants";
+import { InvalidStackValue, StackOverflow, StackUnderflow } from "./errors";
 
 class Stack {
   private readonly maxDepth;
