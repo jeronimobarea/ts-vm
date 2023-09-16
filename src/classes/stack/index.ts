@@ -1,5 +1,6 @@
+import { hexlify } from "@ethersproject/bytes";
 import { MAX_UINT256 } from "../../constants";
-import { InvalidStackValue, StackOverflow, StackUnderflow } from "./errors";
+import { IndexOutOfBounds, InvalidStackValue, StackOverflow, StackUnderflow } from "./errors";
 
 class Stack {
   private readonly maxDepth;
@@ -26,6 +27,41 @@ class Stack {
     if (value == undefined) throw new StackUnderflow;
 
     return value;
+  }
+
+  public swap(indexA: number, indexB: number): void {
+    const adjustedIndexA = this.toStackIndex(indexA);
+    const adjustedIndexB = this.toStackIndex(indexB);
+
+    const a = this.stack[adjustedIndexA];
+    if (a === undefined)
+      throw new IndexOutOfBounds();
+
+    const b = this.stack[adjustedIndexB];
+    if (b === undefined)
+      throw new IndexOutOfBounds();
+
+    this.stack[adjustedIndexA] = b;
+    this.stack[adjustedIndexB] = a;
+  }
+
+  public duplicate(index: number): void {
+    const value = this.stack[this.toStackIndex(index)];
+    if (value === undefined)
+      throw new IndexOutOfBounds();
+
+    this.stack.push(value);
+  }
+
+  private toStackIndex(index: number): number {
+    return this.stack.length - index;
+  }
+
+  public print(): void {
+    console.log(
+      `Stack:\t `,
+      this.stack.map((v) => hexlify(v)),
+    );
   }
 }
 
