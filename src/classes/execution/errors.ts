@@ -1,7 +1,9 @@
-class InvalidBytecode extends Error { }
+/** @format */
 
-class InvalidProgramCounterIndex extends Error { }
+class InvalidBytecode extends Error {}
 
-class UnknownOpCode extends Error { }
+class InvalidProgramCounterIndex extends Error {}
 
-export { InvalidBytecode, InvalidProgramCounterIndex, UnknownOpCode };
+class UnknownOpCode extends Error {}
+
+export { InvalidBytecode, InvalidProgramCounterIndex, UnknownOpCode }

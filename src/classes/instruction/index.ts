@@ -1,24 +1,26 @@
-import ExecutionContext from "../execution";
-import { NotImplementedError } from "./errors";
+/** @format */
+
+import ExecutionContext from '../execution'
+import { NotImplementedError } from './errors'
 
 const defaultExecute = () => {
-  throw new NotImplementedError();
+  throw new NotImplementedError()
 }
 
 class Instruction {
-  public readonly opCode: number;
-  public readonly name: string;
-  public readonly execute: (ctx: ExecutionContext) => void;
+  public readonly opCode: number
+  public readonly name: string
+  public readonly execute: (ctx: ExecutionContext) => Promise<void> | void
 
   constructor(
     opCode: number,
     name: string,
     execute: (ctx: ExecutionContext) => void = defaultExecute,
   ) {
-    this.opCode = opCode;
-    this.name = name;
-    this.execute = execute;
+    this.opCode = opCode
+    this.name = name
+    this.execute = execute
   }
 }
 
-export default Instruction;
+export default Instruction
